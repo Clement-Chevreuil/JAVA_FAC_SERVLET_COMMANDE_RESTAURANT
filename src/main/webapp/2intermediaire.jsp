@@ -14,40 +14,53 @@
     <title>Title</title>
   </head>
   <body>
-
-    <%-- methode 0, recupere 1 variable pas plus --%>
-    <% String genre = request.getParameter("genre"); %>
-    <% String nom = request.getParameter("nom"); %>
-    <%! List listEntree, listPlat, listDessert; %>
-    <% String nom_genre = genre + " " + nom ; %>
-
-    <% listEntree = Arrays.asList(request.getParameterValues("entree"));%>
-    <% listPlat = Arrays.asList(request.getParameterValues("plat")); %>
-    <% List listDessert = Arrays.asList(request.getParameterValues("dessert")); %>
-
-    <% Commande commande = new Commande(); %>
-    <% commande.setClient(nom_genre); %>
-    <% commande.setEntree(listEntree); %>
-    <% commande.setPlat(listPlat); %>
-    <% commande.setDessert(listDessert); %>
-
     <%
-
-      if(application.getAttribute("listCommande") == null)
-      {
-        List<Commande> listCommande = new ArrayList<Commande>();
-        listCommande.add(commande);
-        application.setAttribute("listCommande", listCommande);
-      }
-
+      if (application ==null){ %> <p> <%= null %> </p> <% }
       else
-      {
-        List<Commande> listCommande = (ArrayList<Commande>) application.getAttribute("listCommande");
-        listCommande.add(commande);
-        application.setAttribute("listCommande", listCommande);
-      }
+        {
+          String genre = request.getParameter("genre");
+          String nom = request.getParameter("nom");
+          String nom_genre = genre + " " + nom ;
+          List listEntree = Arrays.asList(request.getParameterValues("entree"));
+          List listPlat = Arrays.asList(request.getParameterValues("plat"));
+          List listDessert = Arrays.asList(request.getParameterValues("dessert"));
+          Commande commande = new Commande();
+          commande.setClient(nom_genre);
+          commande.setEntree(listEntree);
+          commande.setPlat(listPlat);
+          commande.setDessert(listDessert);
 
-      request.getRequestDispatcher("2resume.jsp").forward(request, response);
+          if(application.getAttribute("listCommande") == null)
+          {
+            List<Commande> listCommande = new ArrayList<Commande>();
+            listCommande.add(commande);
+            application.setAttribute("listCommande", listCommande);
+          }
+
+          else
+          {
+            List<Commande> listCommande = (ArrayList<Commande>) application.getAttribute("listCommande");
+            listCommande.add(commande);
+            application.setAttribute("listCommande", listCommande);
+          }
+
+          request.getRequestDispatcher("2resume.jsp").forward(request, response);
+        }
     %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   </body>
 </html>
