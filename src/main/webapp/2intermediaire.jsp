@@ -15,15 +15,16 @@
   </head>
   <body>
     <%
-      if (application ==null){ %> <p> <%= null %> </p> <% }
-      else
-        {
+
+
           String genre = request.getParameter("genre");
           String nom = request.getParameter("nom");
           String nom_genre = genre + " " + nom ;
+
           List listEntree = Arrays.asList(request.getParameterValues("entree"));
           List listPlat = Arrays.asList(request.getParameterValues("plat"));
           List listDessert = Arrays.asList(request.getParameterValues("dessert"));
+
           Commande commande = new Commande();
           commande.setClient(nom_genre);
           commande.setEntree(listEntree);
@@ -36,7 +37,6 @@
             listCommande.add(commande);
             application.setAttribute("listCommande", listCommande);
           }
-
           else
           {
             List<Commande> listCommande = (ArrayList<Commande>) application.getAttribute("listCommande");
@@ -45,7 +45,7 @@
           }
 
           request.getRequestDispatcher("2resume.jsp").forward(request, response);
-        }
+
     %>
 
 

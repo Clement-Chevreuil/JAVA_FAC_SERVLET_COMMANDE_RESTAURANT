@@ -12,6 +12,9 @@
     <title>Title</title>
 </head>
 <body>
+    <jsp:useBean id="menu" class="com.example.application_entreprise_tp3.Menu" ></jsp:useBean>
+
+    <h1>Methode 1 Affichage</h1>
     <form method="post" action="1resume.jsp">
         <label>Nom</label>
 
@@ -61,6 +64,24 @@
 
         <button type="submit">Enregistrer</button>
     </form>
+
+
+    <h1>Autre methode affichage depuis une autre classe</h1>
+    <select name= "entreeV2" multiple="true">
+        <%! List entre ; int r; %>
+
+        <%
+            entre = menu.getEntrees();
+            for( int r=0; r<entre.size(); r++)
+            {
+        %>
+        <option>
+            <%=entre.get(r) %>
+        </option>
+        <%} %>
+    </select>
+
+    <br>
 
     <a href="index.jsp">Index</a>
 </body>

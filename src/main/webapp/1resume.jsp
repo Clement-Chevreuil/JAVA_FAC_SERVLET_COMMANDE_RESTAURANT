@@ -13,37 +13,26 @@
 <head>
     <title>Title</title>
 
-    <%-- methode 0, recupere 1 variable pas plus --%>
+    <h1>GENRE</h1><%-- methode 0 --%>
     <% String genre = request.getParameter("genre"); %>
+    <p><%= genre %></p>
 
-    <%-- methode 1 --%>
+
+    <h1>ENTREE</h1><%-- methode 1 --%>
     <%! String[] listEntree, listPlat ; %>
     <% listEntree = request.getParameterValues("entree");%>
-    <% listPlat = request.getParameterValues("plat"); %>
+    <p><% for(int i=0; i< listEntree.length;i++) { %> <%= listEntree[i] %> <% } %></p>
 
-    <%-- methode 2 --%>
-    <%! List listDessert; %>
+
+    <h1>PLAT</h1> <%-- methode 3 --%>
+    <jsp:useBean id="commande" class="com.example.application_entreprise_tp3.Commande"></jsp:useBean>
+    <jsp:setProperty property="*" name="commande"></jsp:setProperty>
+    <c:forEach var="entree" items="${commande.plat}"><p>${plat}</p></c:forEach>
+
+
+    <h1>DESSER</h1><%-- methode 2 --%>
     <% List listDessert = Arrays.asList(request.getParameterValues("dessert")); %>
-
-
-
-
-    <h1>GENRE</h1>
-    <p>
-        <%= genre %>       <%-- methode 0 --%>
-    </p>
-    <h1>ENTREE</h1>
-    <p>
-        <% for(int i=0; i< listEntree.length;i++) { %> <%= listEntree[i] %> <% } %>     <%-- methode 1 --%>
-    </p>
-    <h1>PLAT</h1>
-    <p>
-        <% for(int j=0; j < listPlat.length;j++) { %> <%= listEntree[j] %>  <% ; } %>   ,  <%-- methode 1 --%>
-    </p>
-    <h1>DESSER</h1>
-    <p>
-        <% for(int k=0; k<listDessert.size();k++) { %>  <%= listDessert.get(k) %> <% ;  } %> ;  <%-- methode 2 --%>
-    </p>
+    <p><% for(int k=0; k<listDessert.size();k++) { %>  <%= listDessert.get(k) %> <% ;  } %></p>
 
     <a href="1commande.jsp">commande</a>
 </head>
